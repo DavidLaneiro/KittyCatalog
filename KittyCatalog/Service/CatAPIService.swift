@@ -8,20 +8,30 @@
 import Foundation
 import Combine
 
-// MARK: API for KittyCatalog Data
-
 class CatAPIService {
-    
+
     // Base URL
     private let baseURL = "https://api.thecatapi.com/v1/breeds"
     
-    // Personal API Key
-    private let apiKey = "live_Re6QFt6XRBYftmqANqBeNBWfYLdryHneSOdJCGv5szzNTmzg2yRl6pfD1hsyfm3p"
+    // API KEY
+    private var apiKey: String?
+    
+    // Initialize the service and load API key
+    init() {
+        // Load the API key from the configuration file
+        self.apiKey = ConfigManager.loadAPIKey()
+    }
 
     // Fetch the Cat Breeds with a result or an error
     func fetchCatBreeds() -> AnyPublisher<[CatBreed], APIError> {
+        
         guard let url = URL(string: baseURL) else {
             return Fail(error: APIError.unknownError).eraseToAnyPublisher()
+        }
+        
+        // Check if API key is available
+        guard let apiKey = self.apiKey else {
+            return Fail(error: APIError.missingAPIKey).eraseToAnyPublisher()
         }
         
         var request = URLRequest(url: url)
