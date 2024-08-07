@@ -13,6 +13,10 @@ class PersistenceController{
 
     let container: NSPersistentContainer
 
+    var viewContext: NSManagedObjectContext {
+        return container.viewContext
+    }
+    
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "CatBreedsModel")
         if inMemory {
@@ -25,8 +29,17 @@ class PersistenceController{
         }
     }
 
-    var viewContext: NSManagedObjectContext {
-        return container.viewContext
+    // Save the context if there are any changes
+    func saveContext() {
+        let context = container.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
     }
     
 }

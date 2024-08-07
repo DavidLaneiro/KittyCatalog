@@ -12,7 +12,6 @@
 		122A1B1B2C62469000B1FA05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 122A1B1A2C62469000B1FA05 /* Preview Assets.xcassets */; };
 		122A1B252C62469000B1FA05 /* KittyCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1B242C62469000B1FA05 /* KittyCatalogTests.swift */; };
 		122A1B2F2C62469000B1FA05 /* KittyCatalogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1B2E2C62469000B1FA05 /* KittyCatalogUITests.swift */; };
-		122A1B312C62469000B1FA05 /* KittyCatalogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1B302C62469000B1FA05 /* KittyCatalogUITestsLaunchTests.swift */; };
 		122A1BBD2C637BA400B1FA05 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1BBC2C637BA400B1FA05 /* PersistenceController.swift */; };
 		122A1BBF2C637C6000B1FA05 /* CatBreedsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1BBE2C637C6000B1FA05 /* CatBreedsViewModel.swift */; };
 		122A1BC12C637D0000B1FA05 /* CatBreedsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1BC02C637D0000B1FA05 /* CatBreedsView.swift */; };
@@ -20,6 +19,7 @@
 		122A1BC52C6381EE00B1FA05 /* CatBreed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1BC42C6381EE00B1FA05 /* CatBreed.swift */; };
 		122A1BC72C6381F900B1FA05 /* CatImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1BC62C6381F900B1FA05 /* CatImage.swift */; };
 		12BD7BC92C6385600078F314 /* CatBreedsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7BC72C6385600078F314 /* CatBreedsModel.xcdatamodeld */; };
+		12BD7BD22C638D2C0078F314 /* KittyCatalogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1B302C62469000B1FA05 /* KittyCatalogUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				122A1B242C62469000B1FA05 /* KittyCatalogTests.swift */,
+				122A1B302C62469000B1FA05 /* KittyCatalogUITestsLaunchTests.swift */,
 			);
 			path = KittyCatalogTests;
 			sourceTree = "<group>";
@@ -137,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				122A1B2E2C62469000B1FA05 /* KittyCatalogUITests.swift */,
-				122A1B302C62469000B1FA05 /* KittyCatalogUITestsLaunchTests.swift */,
 			);
 			path = KittyCatalogUITests;
 			sourceTree = "<group>";
@@ -322,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12BD7BD22C638D2C0078F314 /* KittyCatalogUITestsLaunchTests.swift in Sources */,
 				122A1B252C62469000B1FA05 /* KittyCatalogTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,7 +331,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				122A1B312C62469000B1FA05 /* KittyCatalogUITestsLaunchTests.swift in Sources */,
 				122A1B2F2C62469000B1FA05 /* KittyCatalogUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
