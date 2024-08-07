@@ -19,6 +19,7 @@
 		122A1BC32C637D1200B1FA05 /* CatBreedsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1BC22C637D1200B1FA05 /* CatBreedsDetailView.swift */; };
 		122A1BC52C6381EE00B1FA05 /* CatBreed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1BC42C6381EE00B1FA05 /* CatBreed.swift */; };
 		122A1BC72C6381F900B1FA05 /* CatImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1BC62C6381F900B1FA05 /* CatImage.swift */; };
+		12BD7BC92C6385600078F314 /* CatBreedsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7BC72C6385600078F314 /* CatBreedsModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		122A1BC22C637D1200B1FA05 /* CatBreedsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBreedsDetailView.swift; sourceTree = "<group>"; };
 		122A1BC42C6381EE00B1FA05 /* CatBreed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBreed.swift; sourceTree = "<group>"; };
 		122A1BC62C6381F900B1FA05 /* CatImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImage.swift; sourceTree = "<group>"; };
+		12BD7BC82C6385600078F314 /* CatBreedsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CatBreedsModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				122A1BBC2C637BA400B1FA05 /* PersistenceController.swift */,
+				12BD7BC72C6385600078F314 /* CatBreedsModel.xcdatamodeld */,
 			);
 			path = CoreDataStack;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				122A1BBF2C637C6000B1FA05 /* CatBreedsViewModel.swift in Sources */,
+				12BD7BC92C6385600078F314 /* CatBreedsModel.xcdatamodeld in Sources */,
 				122A1BC52C6381EE00B1FA05 /* CatBreed.swift in Sources */,
 				122A1BC32C637D1200B1FA05 /* CatBreedsDetailView.swift in Sources */,
 				122A1BBD2C637BA400B1FA05 /* PersistenceController.swift in Sources */,
@@ -640,6 +644,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		12BD7BC72C6385600078F314 /* CatBreedsModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				12BD7BC82C6385600078F314 /* CatBreedsModel.xcdatamodel */,
+			);
+			currentVersion = 12BD7BC82C6385600078F314 /* CatBreedsModel.xcdatamodel */;
+			name = CatBreedsModel.xcdatamodeld;
+			path = "/Users/davidlourenco/Desktop/Projetos iOS/SwordHealth/KittyCatalog/KittyCatalog/CoreDataStack/CatBreedsModel.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 122A1B082C62468F00B1FA05 /* Project object */;
 }
