@@ -62,4 +62,4 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 # Configuration files
-Config.plist
+Configuration/Config.plist
