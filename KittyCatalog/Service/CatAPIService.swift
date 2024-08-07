@@ -22,16 +22,20 @@ class CatAPIService {
         self.apiKey = ConfigManager.loadAPIKey()
     }
 
-    // Fetch the Cat Breeds with a result or an error
-    func fetchCatBreeds() -> AnyPublisher<[CatBreed], APIError> {
-        
-        guard let url = URL(string: baseURL) else {
-            return Fail(error: APIError.unknownError).eraseToAnyPublisher()
-        }
-        
-        // Check if API key is available
+    // Fetch the Cat Breeds with pagination support
+    func fetchCatBreeds(page: Int, limit: Int) -> AnyPublisher<[CatBreed], APIError> {
         guard let apiKey = self.apiKey else {
             return Fail(error: APIError.missingAPIKey).eraseToAnyPublisher()
+        }
+
+        var components = URLComponents(string: baseURL)!
+        components.queryItems = [
+            URLQueryItem(name: "page", value: String(page)),
+            URLQueryItem(name: "limit", value: String(limit))
+        ]
+        
+        guard let url = components.url else {
+            return Fail(error: APIError.unknownError).eraseToAnyPublisher()
         }
         
         var request = URLRequest(url: url)
