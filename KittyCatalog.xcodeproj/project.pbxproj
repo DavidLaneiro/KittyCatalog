@@ -23,6 +23,7 @@
 		12BD7BD52C63A32D0078F314 /* CatAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7BD42C63A32D0078F314 /* CatAPIService.swift */; };
 		12BD7BDA2C63A3FA0078F314 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7BD92C63A3FA0078F314 /* APIError.swift */; };
 		12BD7BE42C63B0400078F314 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7BE32C63B0400078F314 /* ConfigManager.swift */; };
+		12BD7BE82C63B88A0078F314 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12BD7BE72C63B88A0078F314 /* Config.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		12BD7BD42C63A32D0078F314 /* CatAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatAPIService.swift; sourceTree = "<group>"; };
 		12BD7BD92C63A3FA0078F314 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		12BD7BE32C63B0400078F314 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
+		12BD7BE72C63B88A0078F314 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				12BD7BE32C63B0400078F314 /* ConfigManager.swift */,
+				12BD7BE72C63B88A0078F314 /* Config.plist */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				122A1B1B2C62469000B1FA05 /* Preview Assets.xcassets in Resources */,
+				12BD7BE82C63B88A0078F314 /* Config.plist in Resources */,
 				122A1B182C62469000B1FA05 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
