@@ -7,6 +7,8 @@
 
 import CoreData
 
+// MARK: Initial CoreData Setup
+
 class PersistenceController{
     
     static let shared = PersistenceController()

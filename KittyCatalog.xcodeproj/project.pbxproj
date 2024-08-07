@@ -20,6 +20,8 @@
 		122A1BC72C6381F900B1FA05 /* CatImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1BC62C6381F900B1FA05 /* CatImage.swift */; };
 		12BD7BC92C6385600078F314 /* CatBreedsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7BC72C6385600078F314 /* CatBreedsModel.xcdatamodeld */; };
 		12BD7BD22C638D2C0078F314 /* KittyCatalogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1B302C62469000B1FA05 /* KittyCatalogUITestsLaunchTests.swift */; };
+		12BD7BD52C63A32D0078F314 /* CatAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7BD42C63A32D0078F314 /* CatAPIService.swift */; };
+		12BD7BDA2C63A3FA0078F314 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7BD92C63A3FA0078F314 /* APIError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		122A1BC42C6381EE00B1FA05 /* CatBreed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatBreed.swift; sourceTree = "<group>"; };
 		122A1BC62C6381F900B1FA05 /* CatImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImage.swift; sourceTree = "<group>"; };
 		12BD7BC82C6385600078F314 /* CatBreedsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CatBreedsModel.xcdatamodel; sourceTree = "<group>"; };
+		12BD7BD42C63A32D0078F314 /* CatAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatAPIService.swift; sourceTree = "<group>"; };
+		12BD7BD92C63A3FA0078F314 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 		122A1B122C62468F00B1FA05 /* KittyCatalog */ = {
 			isa = PBXGroup;
 			children = (
+				12BD7BD62C63A3C20078F314 /* CustomErrors */,
+				12BD7BD32C63A3160078F314 /* Service */,
 				122A1BBB2C637B6300B1FA05 /* CoreDataStack */,
 				122A1BBA2C637A9C00B1FA05 /* ViewModels */,
 				122A1BB92C637A9700B1FA05 /* Views */,
@@ -175,6 +181,22 @@
 				12BD7BC72C6385600078F314 /* CatBreedsModel.xcdatamodeld */,
 			);
 			path = CoreDataStack;
+			sourceTree = "<group>";
+		};
+		12BD7BD32C63A3160078F314 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				12BD7BD42C63A32D0078F314 /* CatAPIService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		12BD7BD62C63A3C20078F314 /* CustomErrors */ = {
+			isa = PBXGroup;
+			children = (
+				12BD7BD92C63A3FA0078F314 /* APIError.swift */,
+			);
+			path = CustomErrors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,7 +330,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				122A1BBF2C637C6000B1FA05 /* CatBreedsViewModel.swift in Sources */,
+				12BD7BD52C63A32D0078F314 /* CatAPIService.swift in Sources */,
 				12BD7BC92C6385600078F314 /* CatBreedsModel.xcdatamodeld in Sources */,
+				12BD7BDA2C63A3FA0078F314 /* APIError.swift in Sources */,
 				122A1BC52C6381EE00B1FA05 /* CatBreed.swift in Sources */,
 				122A1BC32C637D1200B1FA05 /* CatBreedsDetailView.swift in Sources */,
 				122A1BBD2C637BA400B1FA05 /* PersistenceController.swift in Sources */,

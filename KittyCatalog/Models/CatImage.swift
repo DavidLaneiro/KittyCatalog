@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: Model for the CatImage
+
 struct CatImage : Codable {
     
     let id: String

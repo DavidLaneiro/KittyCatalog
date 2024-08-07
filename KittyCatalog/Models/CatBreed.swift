@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: Model for the CatBreed
+
 struct CatBreed: Codable, Identifiable {
     let id: String
     let name: String
