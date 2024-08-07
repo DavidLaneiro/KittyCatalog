@@ -22,7 +22,6 @@
 		12BD7BD22C638D2C0078F314 /* KittyCatalogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A1B302C62469000B1FA05 /* KittyCatalogUITestsLaunchTests.swift */; };
 		12BD7BD52C63A32D0078F314 /* CatAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7BD42C63A32D0078F314 /* CatAPIService.swift */; };
 		12BD7BDA2C63A3FA0078F314 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7BD92C63A3FA0078F314 /* APIError.swift */; };
-		12BD7BE22C63AF300078F314 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12BD7BE12C63AF300078F314 /* Config.plist */; };
 		12BD7BE42C63B0400078F314 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7BE32C63B0400078F314 /* ConfigManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +61,6 @@
 		12BD7BC82C6385600078F314 /* CatBreedsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CatBreedsModel.xcdatamodel; sourceTree = "<group>"; };
 		12BD7BD42C63A32D0078F314 /* CatAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatAPIService.swift; sourceTree = "<group>"; };
 		12BD7BD92C63A3FA0078F314 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
-		12BD7BE12C63AF300078F314 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		12BD7BE32C63B0400078F314 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,7 +205,6 @@
 		12BD7BDE2C63AEC70078F314 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				12BD7BE12C63AF300078F314 /* Config.plist */,
 				12BD7BE32C63B0400078F314 /* ConfigManager.swift */,
 			);
 			path = Configuration;
@@ -318,7 +315,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				122A1B1B2C62469000B1FA05 /* Preview Assets.xcassets in Resources */,
-				12BD7BE22C63AF300078F314 /* Config.plist in Resources */,
 				122A1B182C62469000B1FA05 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
