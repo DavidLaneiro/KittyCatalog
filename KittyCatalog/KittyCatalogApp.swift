@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct KittyCatalogApp: App {
+    
+    let persistenceController = PersistenceController.shared
+
+    // Set the given value to the views environment
     var body: some Scene {
         WindowGroup {
-            CatBreedsView()
+            CatBreedsView().environment(\.managedObjectContext, persistenceController.viewContext)
         }
     }
 }
