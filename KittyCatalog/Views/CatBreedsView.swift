@@ -1,13 +1,13 @@
 //
-//  ContentView.swift
+//  CatBreedsView.swift
 //  KittyCatalog
 //
-//  Created by David Lourenço on 06/08/2024.
+//  Created by David Lourenço on 07/08/2024.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct CatBreedsView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -20,5 +20,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    CatBreedsView()
 }
