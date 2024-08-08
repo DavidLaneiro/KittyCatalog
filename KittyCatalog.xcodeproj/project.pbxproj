@@ -24,6 +24,7 @@
 		12BD7BDA2C63A3FA0078F314 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7BD92C63A3FA0078F314 /* APIError.swift */; };
 		12BD7BE42C63B0400078F314 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7BE32C63B0400078F314 /* ConfigManager.swift */; };
 		12BD7BE82C63B88A0078F314 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12BD7BE72C63B88A0078F314 /* Config.plist */; };
+		12BD7C032C6530040078F314 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7C022C6530040078F314 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		12BD7BD92C63A3FA0078F314 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		12BD7BE32C63B0400078F314 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		12BD7BE72C63B88A0078F314 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		12BD7C022C6530040078F314 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 		122A1BB92C637A9700B1FA05 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				12BD7C012C652FF40078F314 /* CustomViews */,
 				122A1BC02C637D0000B1FA05 /* CatBreedsView.swift */,
 				122A1BC22C637D1200B1FA05 /* CatBreedsDetailView.swift */,
 			);
@@ -211,6 +214,14 @@
 				12BD7BE72C63B88A0078F314 /* Config.plist */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		12BD7C012C652FF40078F314 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				12BD7C022C6530040078F314 /* LoadingView.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -353,6 +364,7 @@
 				12BD7BD52C63A32D0078F314 /* CatAPIService.swift in Sources */,
 				12BD7BC92C6385600078F314 /* CatBreedsModel.xcdatamodeld in Sources */,
 				12BD7BDA2C63A3FA0078F314 /* APIError.swift in Sources */,
+				12BD7C032C6530040078F314 /* LoadingView.swift in Sources */,
 				122A1BC52C6381EE00B1FA05 /* CatBreed.swift in Sources */,
 				122A1BC32C637D1200B1FA05 /* CatBreedsDetailView.swift in Sources */,
 				122A1BBD2C637BA400B1FA05 /* PersistenceController.swift in Sources */,

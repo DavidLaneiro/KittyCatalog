@@ -15,55 +15,59 @@ struct CatBreedsView: View {
     ]
 
     var body: some View {
-        NavigationView {
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(viewModel.filterBreeds()) { breed in
-                        VStack {
-                            if let imageUrl = breed.image?.url, let url = URL(string: imageUrl) {
-                                AsyncImage(url: url) { image in
-                                    image.resizable()
-                                        .scaledToFill()
-                                        .frame(width: 100, height: 100)
-                                        .clipShape(Circle())
-                                } placeholder: {
-                                    ProgressView()
-                                        .frame(width: 100, height: 100)
+        ZStack {
+            NavigationView {
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(viewModel.filterBreeds()) { breed in
+                                
+                            NavigationLink(destination: CatBreedsDetailView(viewModel: self.viewModel, breed: breed)){
+                                VStack {
+                                    if let imageUrl = breed.image?.url, let url = URL(string: imageUrl) {
+                                        AsyncImage(url: url) { image in
+                                            image.resizable()
+                                                .scaledToFill()
+                                                .frame(width: 100, height: 100)
+                                                .clipShape(Circle())
+                                        } placeholder: {
+                                            ProgressView()
+                                                .frame(width: 100, height: 100)
+                                        }
+                                    } else {
+                                        Circle()
+                                            .fill(Color.gray)
+                                            .frame(width: 100, height: 100)
+                                    }
+                                    Text(breed.name)
+                                        .font(.caption)
+                                        .multilineTextAlignment(.center)
+                                    Button(action: {
+                                        viewModel.toggleFavorite(for: breed)
+                                    }) {
+                                        Image(systemName: breed.isFavorite ? "heart.fill" : "heart")
+                                            .foregroundColor(breed.isFavorite ? .red : .gray)
+                                    }
                                 }
-                            } else {
-                                Circle()
-                                    .fill(Color.gray)
-                                    .frame(width: 100, height: 100)
+                                .onAppear {
+                                    viewModel.loadMoreBreedsIfNeeded(currentItem: breed)
                             }
-                            Text(breed.name)
-                                .font(.caption)
-                                .multilineTextAlignment(.center)
-                            Button(action: {
-                                viewModel.toggleFavorite(for: breed)
-                            }) {
-                                Image(systemName: breed.isFavorite ? "heart.fill" : "heart")
-                                    .foregroundColor(breed.isFavorite ? .red : .gray)
                             }
-                        }
-                        .onAppear {
-                            viewModel.loadMoreBreedsIfNeeded(currentItem: breed)
                         }
                     }
+                    .padding()
                 }
-                .padding()
+                .navigationTitle("Cat Breeds")
+                .searchable(text: $viewModel.searchText)
             }
-            .navigationTitle("Cat Breeds")
-            .searchable(text: $viewModel.searchText)
-            .overlay(
-                VStack {
-                    if viewModel.isLoading {
-                        ProgressView("Loading...")
-                    }
-                }
-            )
+            
+            
+            if viewModel.isLoading {
+                LoadingView()
+            }
         }
     }
 }
+
 
 #Preview {
     CatBreedsView()
