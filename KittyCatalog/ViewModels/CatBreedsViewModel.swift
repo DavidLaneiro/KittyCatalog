@@ -14,136 +14,146 @@ import CoreData
 class CatBreedsViewModel: ObservableObject {
     
     @Published var catBreeds: [CatBreed] = []
-    @Published var favouriteBreeds: [CatBreed] = []
     @Published var searchText: String = ""
-    @Published var isOffline: Bool = false
     @Published var isLoading: Bool = false
-    @Published var canLoadMore: Bool = true
-
     private var cancellables = Set<AnyCancellable>()
-    private let catAPIService = CatAPIService()
-    private let persistenceController = PersistenceController.shared
     
-    private var currentPage: Int = 0
+    private var currentPage = 1
+    private let itemsPerPage = 10
+    private let catAPIService: CatAPIService
+    private let persistenceController: PersistenceController
     
-    // Setup the limit of images per page
-    private let itemsPerPage: Int = 10
-
-    // When initialized gather the Cat Breeds
-    init() {
+    // Init ViewModel
+    init(catAPIService: CatAPIService = CatAPIService(), persistenceController: PersistenceController = .shared) {
+        self.catAPIService = catAPIService
+        self.persistenceController = persistenceController
+        
+        // Start by fetching the breeds
         fetchCatBreeds()
     }
-
     
-    // Main Load of Realtime Data
     func fetchCatBreeds() {
         
-        // Start with a loading state
+        // Initial State is Loading
         isLoading = true
-        
-        // Look for cached data
-        loadCachedBreeds(page: currentPage)
-
-        // Real Request for updated data
         catAPIService.fetchCatBreeds(page: currentPage, limit: itemsPerPage)
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                self?.isLoading = false
-                switch completion {
-                case .finished:
-                    self?.isOffline = false
-                case .failure(let error):
-                    self?.isOffline = true
+            .sink { [weak self] completion in
+                guard let self = self else { return }
+                if case .failure(let error) = completion {
                     print("Error fetching cat breeds: \(error)")
+                    self.loadBreedsFromCache() // Load from cache if API fails
                 }
-            }, receiveValue: { [weak self] breeds in
+                // Stop the loading on API fail
+                self.isLoading = false
+            } receiveValue: { [weak self] breeds in
                 guard let self = self else { return }
                 
-                // If the breeds received are less then the items per page we cant load more.
-                if breeds.count < self.itemsPerPage {
-                    self.canLoadMore = false
+                // Save updated data to cache
+                self.saveBreedsToCache(breeds)
+                
+                // If first page set the value
+                if self.currentPage == 1 {
+                    self.catBreeds = breeds
+                } else {
+                    self.catBreeds.append(contentsOf: breeds) // Else append the value
                 }
-                self.catBreeds.append(contentsOf: breeds)
-                self.cacheBreeds(breeds)
-            })
+                
+                // Increment the page
+                self.currentPage += 1
+            }
             .store(in: &cancellables)
     }
-
     
-    // Load what is in Cache
-    private func loadCachedBreeds(page: Int) {
-        let context = persistenceController.viewContext
-        let fetchRequest: NSFetchRequest<CatBreedEntity> = CatBreedEntity.fetchRequest()
-        fetchRequest.fetchLimit = itemsPerPage
-        fetchRequest.fetchOffset = page * itemsPerPage
-
-        do {
-            let entities = try context.fetch(fetchRequest)
-            self.catBreeds.append(contentsOf: entities.map { CatBreed(from: $0) })
-            if entities.count < itemsPerPage {
-                self.canLoadMore = false
-            }
-        } catch {
-            print("Failed to fetch cached cat breeds: \(error)")
-        }
-    }
-
-    // When new real data received store it in cache
-    private func cacheBreeds(_ breeds: [CatBreed]) {
-        let context = persistenceController.viewContext
-
-        for breed in breeds {
-            let entity = CatBreedEntity(context: context)
-            entity.id = breed.id
-            entity.name = breed.name
-            entity.origin = breed.origin
-            entity.temperament = breed.temperament
-            entity.descriptionText = breed.description
-            entity.lifeSpan = breed.lifeSpan
-            entity.wikipediaURL = breed.wikipediaURL
-            
-            if let image = breed.image {
-                let imageEntity = CatImageEntity(context: context)
-                imageEntity.id = image.id
-                imageEntity.width = Int64(image.width)
-                imageEntity.height = Int64(image.height)
-                imageEntity.url = image.url
-                entity.image = imageEntity
+    private func saveBreedsToCache(_ breeds: [CatBreed]) {
+        // Get the context
+        let context = persistenceController.container.viewContext
+        context.perform {
+            do {
+                for breed in breeds {
+                    let breedEntity = CatBreedEntity(context: context)
+                    breedEntity.id = breed.id
+                    breedEntity.name = breed.name
+                    breedEntity.origin = breed.origin
+                    breedEntity.temperament = breed.temperament
+                    breedEntity.descriptionText = breed.description
+                    breedEntity.lifeSpan = breed.lifeSpan
+                    breedEntity.wikipediaURL = breed.wikipediaURL
+                    breedEntity.isFavorite = false // Default to not favorite
+                    
+                    if let image = breed.image {
+                        let imageEntity = CatImageEntity(context: context)
+                        imageEntity.id = image.id
+                        imageEntity.width = Int64(image.width)
+                        imageEntity.height = Int64(image.height)
+                        imageEntity.url = image.url
+                        breedEntity.image = imageEntity
+                    }
+                }
+                
+                // Save uncommited changes
+                try context.save()
+            } catch {
+                print("Failed to save breeds to Core Data: \(error)")
             }
         }
-
+    }
+    
+    // Get breeds from cache
+    private func loadBreedsFromCache() {
+        let context = persistenceController.container.viewContext
+        let request: NSFetchRequest<CatBreedEntity> = CatBreedEntity.fetchRequest()
+        
         do {
-            try context.save()
+            let breedEntities = try context.fetch(request)
+            self.catBreeds = breedEntities.map { CatBreed(from: $0) }
         } catch {
-            print("Failed to cache cat breeds: \(error)")
+            print("Failed to fetch breeds from Core Data: \(error)")
         }
     }
-
-    // When a specific image appears, see if the list needs to load more Breeds
-    func loadMoreBreedsIfNeeded(currentItem: CatBreed) {
-        guard let lastItem = catBreeds.last else {
+    
+    // Change the favorite value for the breed passed as parameter
+    func toggleFavorite(for breed: CatBreed) {
+        let context = persistenceController.container.viewContext
+        let request: NSFetchRequest<CatBreedEntity> = CatBreedEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", breed.id)
+        
+        do {
+            let results = try context.fetch(request)
+            if let breedEntity = results.first {
+                breedEntity.isFavorite.toggle()
+                try context.save()
+            }
+        } catch {
+            print("Failed to update favorite status: \(error)")
+        }
+        
+        if let index = catBreeds.firstIndex(where: { $0.id == breed.id }) {
+            catBreeds[index].isFavorite.toggle()
+        }
+    }
+    
+    func loadMoreBreedsIfNeeded(currentItem: CatBreed?) {
+        guard let currentItem = currentItem else {
+            fetchCatBreeds()
             return
         }
-
-        if currentItem.id == lastItem.id && canLoadMore && !isLoading {
-            currentPage += 1
+        
+        // Get the index that is 5 positions before the end of the catBreeds array.
+        // If close of that index load more breeds.
+        
+        let thresholdIndex = catBreeds.index(catBreeds.endIndex, offsetBy: -5)
+        if catBreeds.firstIndex(where: { $0.id == currentItem.id }) == thresholdIndex {
             fetchCatBreeds()
         }
     }
-
-    func addToFavourites(breed: CatBreed) {
-        favouriteBreeds.append(breed)
-    }
-
-    func removeFromFavourites(breed: CatBreed) {
-        favouriteBreeds.removeAll { $0.id == breed.id }
-    }
-
+    
+    // Filter by the state of the text in the searchText Published var
     func filterBreeds() -> [CatBreed] {
         if searchText.isEmpty {
             return catBreeds
         } else {
-            return catBreeds.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+            return catBreeds.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
         }
     }
 }
