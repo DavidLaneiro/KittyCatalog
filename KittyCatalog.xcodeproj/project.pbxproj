@@ -229,6 +229,8 @@
 			dependencies = (
 			);
 			name = KittyCatalog;
+			packageProductDependencies = (
+			);
 			productName = KittyCatalog;
 			productReference = 122A1B102C62468F00B1FA05 /* KittyCatalog.app */;
 			productType = "com.apple.product-type.application";
@@ -301,6 +303,8 @@
 				Base,
 			);
 			mainGroup = 122A1B072C62468F00B1FA05;
+			packageReferences = (
+			);
 			productRefGroup = 122A1B112C62468F00B1FA05 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

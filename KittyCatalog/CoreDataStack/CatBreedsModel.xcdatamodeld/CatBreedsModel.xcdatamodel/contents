@@ -3,6 +3,7 @@
     <entity name="CatBreedEntity" representedClassName="CatBreedEntity" syncable="YES" codeGenerationType="class">
         <attribute name="descriptionText" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lifeSpan" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="origin" optional="YES" attributeType="String"/>
