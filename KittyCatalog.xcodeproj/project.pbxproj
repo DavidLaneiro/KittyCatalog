@@ -26,6 +26,7 @@
 		12BD7BE82C63B88A0078F314 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12BD7BE72C63B88A0078F314 /* Config.plist */; };
 		12BD7C032C6530040078F314 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7C022C6530040078F314 /* LoadingView.swift */; };
 		12BD7C062C6532FE0078F314 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 12BD7C052C6532FE0078F314 /* Kingfisher */; };
+		12BD7C092C6535EC0078F314 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BD7C082C6535EC0078F314 /* MainTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		12BD7BE32C63B0400078F314 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		12BD7BE72C63B88A0078F314 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		12BD7C022C6530040078F314 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		12BD7C082C6535EC0078F314 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 		122A1BB92C637A9700B1FA05 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				12BD7C072C6535D80078F314 /* TabViews */,
 				12BD7C012C652FF40078F314 /* CustomViews */,
 				122A1BC02C637D0000B1FA05 /* CatBreedsView.swift */,
 				122A1BC22C637D1200B1FA05 /* CatBreedsDetailView.swift */,
@@ -224,6 +227,14 @@
 				12BD7C022C6530040078F314 /* LoadingView.swift */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		12BD7C072C6535D80078F314 /* TabViews */ = {
+			isa = PBXGroup;
+			children = (
+				12BD7C082C6535EC0078F314 /* MainTabView.swift */,
+			);
+			path = TabViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,6 +381,7 @@
 				12BD7BDA2C63A3FA0078F314 /* APIError.swift in Sources */,
 				12BD7C032C6530040078F314 /* LoadingView.swift in Sources */,
 				122A1BC52C6381EE00B1FA05 /* CatBreed.swift in Sources */,
+				12BD7C092C6535EC0078F314 /* MainTabView.swift in Sources */,
 				122A1BC32C637D1200B1FA05 /* CatBreedsDetailView.swift in Sources */,
 				122A1BBD2C637BA400B1FA05 /* PersistenceController.swift in Sources */,
 				122A1BC72C6381F900B1FA05 /* CatImage.swift in Sources */,

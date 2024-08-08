@@ -5,6 +5,7 @@
 //  Created by David Lourenço on 07/08/2024.
 //
 import SwiftUI
+import Kingfisher
 
 struct CatBreedsView: View {
     @StateObject private var viewModel = CatBreedsViewModel()
@@ -24,15 +25,15 @@ struct CatBreedsView: View {
                             NavigationLink(destination: CatBreedsDetailView(viewModel: self.viewModel, breed: breed)){
                                 VStack {
                                     if let imageUrl = breed.image?.url, let url = URL(string: imageUrl) {
-                                        AsyncImage(url: url) { image in
-                                            image.resizable()
+                                        KFImage(url)
+                                                .placeholder {
+                                                    ProgressView()
+                                                        .frame(width: 100, height: 100)
+                                                }
+                                                .resizable()
                                                 .scaledToFill()
                                                 .frame(width: 100, height: 100)
                                                 .clipShape(Circle())
-                                        } placeholder: {
-                                            ProgressView()
-                                                .frame(width: 100, height: 100)
-                                        }
                                     } else {
                                         Circle()
                                             .fill(Color.gray)
@@ -56,7 +57,7 @@ struct CatBreedsView: View {
                     }
                     .padding()
                 }
-                .navigationTitle("Cat Breeds")
+                .navigationTitle("KittyCatalog")
                 .searchable(text: $viewModel.searchText)
             }
             

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CatBreedsDetailView: View {
     @ObservedObject var viewModel: CatBreedsViewModel
@@ -16,15 +17,15 @@ struct CatBreedsDetailView: View {
             VStack(alignment: .leading, spacing: 20) {
                 
                 if let imageUrl = breed.image?.url, let url = URL(string: imageUrl) {
-                    AsyncImage(url: url) { image in
-                        image.resizable()
+                    KFImage(url)
+                            .placeholder {
+                                ProgressView()
+                                    .frame(maxWidth: .infinity, maxHeight: 200)
+                            }
+                            .resizable()
                             .scaledToFill()
-                            .frame(maxWidth: .infinity, maxHeight: 200)
+                            .frame(maxWidth: .infinity, maxHeight: 300)
                             .clipShape(Rectangle())
-                    } placeholder: {
-                        ProgressView()
-                            .frame(maxWidth: .infinity, maxHeight: 200)
-                    }
                 } else {
                     Rectangle()
                         .fill(Color.gray)

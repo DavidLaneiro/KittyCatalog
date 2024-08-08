@@ -15,7 +15,7 @@ struct KittyCatalogApp: App {
     // Set the given value to the views environment
     var body: some Scene {
         WindowGroup {
-            CatBreedsView().environment(\.managedObjectContext, persistenceController.viewContext)
+            MainTabView().environment(\.managedObjectContext, persistenceController.viewContext)
         }
     }
 }
