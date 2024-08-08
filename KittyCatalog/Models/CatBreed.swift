@@ -18,14 +18,13 @@ struct CatBreed: Codable, Identifiable {
     let lifeSpan: String
     let wikipediaURL: String?
     let image: CatImage?
-    var isFavorite: Bool
+    var isFavorite: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case id, name, temperament, origin, description
         case lifeSpan = "life_span"
         case wikipediaURL = "wikipedia_url"
         case image
-        case isFavorite
     }
     
     // Initializer for creating directly
