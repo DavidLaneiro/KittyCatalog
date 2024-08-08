@@ -18,7 +18,7 @@ class CatBreedsViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     private var cancellables = Set<AnyCancellable>()
     
-    private var currentPage = 1
+    private var currentPage = 0
     private let itemsPerPage = 10
     private let catAPIService: CatAPIService
     private let persistenceController: PersistenceController
@@ -53,7 +53,7 @@ class CatBreedsViewModel: ObservableObject {
                 self.saveBreedsToCache(breeds)
                 
                 // If first page set the value
-                if self.currentPage == 1 {
+                if self.currentPage == 0 {
                     self.catBreeds = breeds
                 } else {
                     self.catBreeds.append(contentsOf: breeds) // Else append the value
