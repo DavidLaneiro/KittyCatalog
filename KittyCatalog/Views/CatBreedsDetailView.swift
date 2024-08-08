@@ -23,8 +23,8 @@ struct CatBreedsDetailView: View {
                                     .frame(maxWidth: .infinity, maxHeight: 200)
                             }
                             .resizable()
-                            .scaledToFill()
-                            .frame(maxWidth: .infinity, maxHeight: 300)
+                            .scaledToFit()
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .clipShape(Rectangle())
                 } else {
                     Rectangle()

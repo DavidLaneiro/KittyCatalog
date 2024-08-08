@@ -15,7 +15,7 @@ struct MainTabView: View {
                     Label("Breeds", systemImage: "list.dash")
                 }
 
-            CatBreedsView()
+            FavoritesView()
                 .tabItem {
                     Label("Favorites", systemImage: "heart.fill")
                 }

@@ -1,13 +1,14 @@
 //
-//  CatBreedsView.swift
+//  FavoritesView.swift
 //  KittyCatalog
 //
-//  Created by David Lourenço on 07/08/2024.
+//  Created by David Lourenço on 08/08/2024.
 //
+
 import SwiftUI
 import Kingfisher
 
-struct CatBreedsView: View {
+struct FavoritesView: View {
     @StateObject private var viewModel = CatBreedsViewModel()
     private let columns = [
         GridItem(.flexible()),
@@ -20,7 +21,7 @@ struct CatBreedsView: View {
             NavigationView {
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(viewModel.filterBreeds()) { breed in
+                        ForEach(viewModel.catBreeds.filter { $0.isFavorite }) { breed in
                                 
                             NavigationLink(destination: CatBreedsDetailView(viewModel: self.viewModel, breed: breed)){
                                 VStack {
@@ -57,10 +58,9 @@ struct CatBreedsView: View {
                     }
                     .padding()
                 }
-                .navigationTitle("KittyCatalog")
+                .navigationTitle("Favorites")
                 .searchable(text: $viewModel.searchText)
-            }.foregroundStyle(.primary)
-            
+            }
             
             
             if viewModel.isLoading {
@@ -72,5 +72,5 @@ struct CatBreedsView: View {
 
 
 #Preview {
-    CatBreedsView()
+    FavoritesView()
 }
