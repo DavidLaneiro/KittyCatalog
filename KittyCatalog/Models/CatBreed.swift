@@ -17,7 +17,7 @@ struct CatBreed: Codable, Identifiable {
     let description: String
     let lifeSpan: String
     let wikipediaURL: String?
-    let image: CatImage?
+    var image: CatImage?
     var isFavorite: Bool = false
     
     enum CodingKeys: String, CodingKey {

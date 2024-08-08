@@ -30,7 +30,7 @@ struct FavoritesView: View {
                                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }else{
                         LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(viewModel.catBreeds.filter { $0.isFavorite }) { breed in
+                            ForEach(viewModel.filterFavoriteBreeds()) { breed in
                                     
                                 NavigationLink(destination: CatBreedsDetailView(viewModel: self.viewModel, breed: breed)){
                                     VStack {
@@ -59,9 +59,6 @@ struct FavoritesView: View {
                                                 .foregroundColor(breed.isFavorite ? .red : .gray)
                                         }
                                     }
-                                    .onAppear {
-                                        viewModel.loadMoreBreedsIfNeeded(currentItem: breed)
-                                }
                                 }
                             }
                         }
@@ -69,7 +66,7 @@ struct FavoritesView: View {
                     }
                 }
                 .navigationTitle("Favorites")
-                .searchable(text: $viewModel.searchText)
+                .searchable(text: $viewModel.favoriteSearchText)
             }.foregroundStyle(.primary)
             
             
