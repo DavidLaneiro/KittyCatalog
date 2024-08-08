@@ -28,8 +28,13 @@ class CatBreedsViewModel: ObservableObject {
         self.catAPIService = catAPIService
         self.persistenceController = persistenceController
         
-        // Start by fetching the breeds
-        fetchCatBreeds()
+        // Load breeds from cache first
+        loadBreedsFromCache()
+        
+        // If cache is empty, fetch from API
+        if catBreeds.isEmpty {
+            fetchCatBreeds()
+        }
     }
     
     func fetchCatBreeds() {
@@ -61,6 +66,9 @@ class CatBreedsViewModel: ObservableObject {
                 
                 // Increment the page
                 self.currentPage += 1
+                
+                // Stop the loading on success
+                self.isLoading = false
             }
             .store(in: &cancellables)
     }
@@ -70,6 +78,13 @@ class CatBreedsViewModel: ObservableObject {
         let context = persistenceController.container.viewContext
         context.perform {
             do {
+                
+                // Delete existing cache
+                let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CatBreedEntity.fetchRequest()
+                let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+                try context.execute(deleteRequest)
+                try context.save()
+                
                 for breed in breeds {
                     let breedEntity = CatBreedEntity(context: context)
                     breedEntity.id = breed.id
@@ -79,7 +94,7 @@ class CatBreedsViewModel: ObservableObject {
                     breedEntity.descriptionText = breed.description
                     breedEntity.lifeSpan = breed.lifeSpan
                     breedEntity.wikipediaURL = breed.wikipediaURL
-                    breedEntity.isFavorite = false // Default to not favorite
+                    breedEntity.isFavorite = breedEntity.isFavorite  // Preserve favorite status
                     
                     if let image = breed.image {
                         let imageEntity = CatImageEntity(context: context)
@@ -134,18 +149,18 @@ class CatBreedsViewModel: ObservableObject {
     }
     
     func loadMoreBreedsIfNeeded(currentItem: CatBreed?) {
-        guard let currentItem = currentItem else {
-            fetchCatBreeds()
-            return
-        }
-        
-        // Get the index that is 5 positions before the end of the catBreeds array.
-        // If close of that index load more breeds.
-        
-        let thresholdIndex = catBreeds.index(catBreeds.endIndex, offsetBy: -5)
-        if catBreeds.firstIndex(where: { $0.id == currentItem.id }) == thresholdIndex {
-            fetchCatBreeds()
-        }
+//        guard let currentItem = currentItem else {
+//            fetchCatBreeds()
+//            return
+//        }
+//        
+//        // Get the index that is 5 positions before the end of the catBreeds array.
+//        // If close of that index load more breeds.
+//        
+//        let thresholdIndex = catBreeds.index(catBreeds.endIndex, offsetBy: -5)
+//        if catBreeds.firstIndex(where: { $0.id == currentItem.id }) == thresholdIndex {
+//            fetchCatBreeds()
+//        }
     }
     
     // Filter by the state of the text in the searchText Published var

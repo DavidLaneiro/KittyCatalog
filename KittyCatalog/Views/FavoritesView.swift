@@ -9,7 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct FavoritesView: View {
-    @StateObject private var viewModel = CatBreedsViewModel()
+    @EnvironmentObject private var viewModel : CatBreedsViewModel
     private let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -20,47 +20,57 @@ struct FavoritesView: View {
         ZStack {
             NavigationView {
                 ScrollView {
-                    LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(viewModel.catBreeds.filter { $0.isFavorite }) { breed in
-                                
-                            NavigationLink(destination: CatBreedsDetailView(viewModel: self.viewModel, breed: breed)){
-                                VStack {
-                                    if let imageUrl = breed.image?.url, let url = URL(string: imageUrl) {
-                                        KFImage(url)
-                                                .placeholder {
-                                                    ProgressView()
-                                                        .frame(width: 100, height: 100)
-                                                }
-                                                .resizable()
-                                                .scaledToFill()
+                    if viewModel.catBreeds.filter({ $0.isFavorite }).isEmpty {
+                                           VStack {
+                                               Text("No favorites to show 😞")
+                                                   .font(.title2)
+                                                   .foregroundColor(.secondary)
+                                                   .padding()
+                                           }
+                                           .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }else{
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            ForEach(viewModel.catBreeds.filter { $0.isFavorite }) { breed in
+                                    
+                                NavigationLink(destination: CatBreedsDetailView(viewModel: self.viewModel, breed: breed)){
+                                    VStack {
+                                        if let imageUrl = breed.image?.url, let url = URL(string: imageUrl) {
+                                            KFImage(url)
+                                                    .placeholder {
+                                                        ProgressView()
+                                                            .frame(width: 100, height: 100)
+                                                    }
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 100, height: 100)
+                                                    .clipShape(Circle())
+                                        } else {
+                                            Circle()
+                                                .fill(Color.gray)
                                                 .frame(width: 100, height: 100)
-                                                .clipShape(Circle())
-                                    } else {
-                                        Circle()
-                                            .fill(Color.gray)
-                                            .frame(width: 100, height: 100)
+                                        }
+                                        Text(breed.name)
+                                            .font(.caption)
+                                            .multilineTextAlignment(.center)
+                                        Button(action: {
+                                            viewModel.toggleFavorite(for: breed)
+                                        }) {
+                                            Image(systemName: breed.isFavorite ? "heart.fill" : "heart")
+                                                .foregroundColor(breed.isFavorite ? .red : .gray)
+                                        }
                                     }
-                                    Text(breed.name)
-                                        .font(.caption)
-                                        .multilineTextAlignment(.center)
-                                    Button(action: {
-                                        viewModel.toggleFavorite(for: breed)
-                                    }) {
-                                        Image(systemName: breed.isFavorite ? "heart.fill" : "heart")
-                                            .foregroundColor(breed.isFavorite ? .red : .gray)
-                                    }
+                                    .onAppear {
+                                        viewModel.loadMoreBreedsIfNeeded(currentItem: breed)
                                 }
-                                .onAppear {
-                                    viewModel.loadMoreBreedsIfNeeded(currentItem: breed)
-                            }
+                                }
                             }
                         }
+                        .padding()
                     }
-                    .padding()
                 }
                 .navigationTitle("Favorites")
                 .searchable(text: $viewModel.searchText)
-            }
+            }.foregroundStyle(.primary)
             
             
             if viewModel.isLoading {
